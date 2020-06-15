@@ -12,7 +12,7 @@ public class Comment {
 
     private int productId;
 
-    private int accepted; // 0 laf chua duyet, 1 la da duyet, 2 duyet khong dong y
+    private int accepted; // 0 la cho duyet, 1 la da duyet, 2 duyet khong dong y
 
     private boolean deleted;
 

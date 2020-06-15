@@ -14,9 +14,9 @@ public class Bill {
 
     private String address;
 
-    private LocalDate createTime;
+    private LocalDate createTime; // thoi gian ta
 
-    private int status;
+    private int status; //0 cho duyen, 1 duyet dong y, 2 duyen kong dong y
 
     private boolean deleted;
 

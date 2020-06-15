@@ -14,11 +14,11 @@ public class Product {
 
     private boolean deleted;
 
-    private String image;
+    private String image; // lưu trữ đường của hình ảnh
 
-    private String introduction;
+    private String introduction; // miêu tả về sản phẩm
 
-    private String specification;
+    private String specification;// thông số kỹ thuật về sản phẩm
 
     private boolean soldOut; // true la het hang, false la con hang
 
@@ -26,9 +26,9 @@ public class Product {
 
     private int categoryId;
 
-    private int bouth;
+    private int bouth; // số lượng sản phẩm đã bán được
 
-    private int promotiton;
+    private int promotiton; // phần trăm khuyến mãi của sản phẩm
 
     @Override
     public String toString() {

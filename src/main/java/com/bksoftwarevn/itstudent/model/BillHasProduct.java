@@ -6,18 +6,18 @@ public class BillHasProduct {
 
     private int billId;
 
-    private int quantity;
+    private int quantity; // so luong cua san pham trong hoa don
 
-    private double producPrice;
+    private double productPrice; // giá của sản phẩm tại thời điểm tạo hóa đơn
 
     public BillHasProduct() {
     }
 
-    public BillHasProduct(int productId, int billId, int quantity, double producPrice) {
+    public BillHasProduct(int productId, int billId, int quantity, double productPrice) {
         this.productId = productId;
         this.billId = billId;
         this.quantity = quantity;
-        this.producPrice = producPrice;
+        this.productPrice = productPrice;
     }
 
     public int getProductId() {
@@ -44,12 +44,12 @@ public class BillHasProduct {
         this.quantity = quantity;
     }
 
-    public double getProducPrice() {
-        return producPrice;
+    public double getProductPrice() {
+        return productPrice;
     }
 
-    public void setProducPrice(double producPrice) {
-        this.producPrice = producPrice;
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class BillHasProduct {
                 "productId=" + productId +
                 ", billId=" + billId +
                 ", quantity=" + quantity +
-                ", producPrice=" + producPrice +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.bksoftwarevn.itstudent.view;
 
+import com.bksoftwarevn.itstudent.controller.CategoryController;
 import com.bksoftwarevn.itstudent.dao.CategoryDao;
 import com.bksoftwarevn.itstudent.dao_impl.CategoryDaoImpl;
 import com.bksoftwarevn.itstudent.model.Category;
@@ -13,14 +14,13 @@ public class Main {
 
     public static void main(String[] args) {
         MyConnection myConnection = new MyConnection();
-        CategoryDao categoryDao = new CategoryDaoImpl();
+        CategoryController categoryController = new CategoryController();
         try {
             myConnection.connectDB();
-            Category category = new Category();
-            category.setName("Iphone12");
-            category.setDeleted(false);
+            System.out.println(categoryController.findAll());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
 }

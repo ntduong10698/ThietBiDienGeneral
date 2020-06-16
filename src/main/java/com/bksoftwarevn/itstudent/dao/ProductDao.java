@@ -8,4 +8,7 @@ import java.util.List;
 public interface ProductDao extends BaseDao<Product> {
 
     List<Product> sortByCreateDate() throws SQLException;
+
+    List<Product> findByCategory(int idCategory) throws Exception;
+
 }

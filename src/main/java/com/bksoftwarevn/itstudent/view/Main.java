@@ -22,6 +22,8 @@ public class Main {
         ProductDao productDao = new ProductDaoImpl();
         try {
             myConnection.connectDB();
+            Product product = new Product(0,"Dây cáp 12", 10000, null, false, "", "", "", false, 12, 10, 1, 10);
+            System.out.println(productDao.insert(product));
             List<Product> list = productDao.search("", null, "2020-05-01", null, -1, -1,-1, -1);
             for (Product p: list) {
                 System.out.println(p);

@@ -5,6 +5,7 @@ import com.bksoftwarevn.itstudent.dao.ProductDao;
 import com.bksoftwarevn.itstudent.model.MyConnection;
 import com.bksoftwarevn.itstudent.model.Product;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -139,7 +140,28 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product insert(Product product) throws SQLException {
-        return null;
+        Product newProduct = null;
+        String sql = "insert into product values (null, ?, ?, ?, false, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = myConnection.prepareUpdate(sql);
+        preparedStatement.setString(1, product.getName());
+        preparedStatement.setDouble(2, product.getPrice());
+        preparedStatement.setDate(3, new Date(new java.util.Date().getTime()));
+        preparedStatement.setString(4, product.getImage());
+        preparedStatement.setString(5, product.getIntroduction());
+        preparedStatement.setString(6, product.getSpecification());
+        preparedStatement.setBoolean(7, product.isSoldOut());
+        preparedStatement.setInt(8, product.getGuarantee());
+        preparedStatement.setInt(9, product.getCategoryId());
+        preparedStatement.setInt(10, product.getBouth());
+        preparedStatement.setInt(11, product.getPromotiton());
+        int rs = preparedStatement.executeUpdate();
+        if(rs > 0 ) {
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.first()) {
+                newProduct = findById((int) resultSet.getLong(1));
+            }
+        }
+        return newProduct;
     }
 
     @Override

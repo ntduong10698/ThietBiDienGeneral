@@ -29,6 +29,16 @@ public class ProductDaoImpl implements ProductDao {
                 if(product != null) products.add(product);
             } while(resultSet.next());
         }
+        return products;
+    }
+
+    @Override
+    public List<Product> sortBy(String field, boolean isAsc) throws SQLException {
+        String sql = "select * from product where " +
+                "deleted = false order by " + field + (isAsc ? "ASC" : "DESC");
+        PreparedStatement preparedStatement = myConnection.prepare(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return getList(resultSet);
     }
 
     @Override
@@ -47,19 +57,48 @@ public class ProductDaoImpl implements ProductDao {
 //            } while(resultSet.next());
 //        }
 //        return products;
-        List<Product> products = new ArrayList<>();
         String sql = "select p.* from product as p, category as c " +
                 "where c.deleted = false and c.id = ? and p.category_id = category.id";
         PreparedStatement preparedStatement = myConnection.prepare(sql);
         preparedStatement.setInt(1, idCategory);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.first()) {
-            do {
-                Product product = getObject(resultSet);
-                if(product != null) products.add(product);
-            } while(resultSet.next());
+        return getList(resultSet);
+    }
+
+    @Override
+    public List<Product> search(String name, String startDate, String endDate, Boolean soldOut, int guarantee, int category, int bouth, int promotion) throws Exception {
+        String sql = "select distinct p.* from product as p, category as c where p.deleted = false and " +
+                "p.name like ? and " +
+                "(? is null or p.create_date >= ?) and " +
+                "(? is null or p.create_date <= ?) and " +
+                "(? is null or p.sold_out = ?) and " +
+                "(? = -1 or p.guarantee = ?) and " +
+                "(? = -1 or (c.deleted = false and c.id = ? and p.category_id = c.id))  and " +
+                "(? = -1 or p.bought = ?) and" +
+                "(? = -1 or p.promotion = ?)";
+        PreparedStatement preparedStatement = myConnection.prepare(sql);
+        preparedStatement.setString(1, "%"+name+"%");
+        preparedStatement.setString(2, startDate);
+        preparedStatement.setString(3, startDate == null ? "0000-01-01" : startDate);
+        preparedStatement.setString(4, endDate);
+        preparedStatement.setString(5, endDate == null ? "9999-12-31" : endDate);
+        if(soldOut == null) {
+            preparedStatement.setString(6, null);
+            preparedStatement.setBoolean(7, true);
+        } else {
+            preparedStatement.setString(6, "");
+            preparedStatement.setBoolean(7, soldOut);
         }
-        return products;
+        preparedStatement.setInt(8,  guarantee);
+        preparedStatement.setInt(9,  guarantee);
+        preparedStatement.setInt(10, category);
+        preparedStatement.setInt(11, category);
+        preparedStatement.setInt(12, bouth);
+        preparedStatement.setInt(13, bouth);
+        preparedStatement.setInt(14, promotion);
+        preparedStatement.setInt(15, promotion);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return getList(resultSet);
     }
 
     @Override
@@ -69,11 +108,23 @@ public class ProductDaoImpl implements ProductDao {
         resultSet.getDouble("price"), resultSet.getDate("create_date"),
         resultSet.getBoolean("deleted"), resultSet.getString("image"),
                 resultSet.getString("introduction"),
-                resultSet.getString("specification"),
+                resultSet.getString("spectification"),
         resultSet.getBoolean("sold_out"), resultSet.getInt("guarantee"),
-        resultSet.getInt("category_id"), resultSet.getInt("bouth"),
-        resultSet.getInt(" promotiton"));
+        resultSet.getInt("category_id"), resultSet.getInt("bought"),
+        resultSet.getInt("promotion"));
         return product;
+    }
+
+    @Override
+    public List<Product> getList(ResultSet resultSet) throws SQLException {
+        List<Product> productList = new ArrayList<>();
+        if(resultSet.first()) {
+            do {
+                Product product = getObject(resultSet);
+                if(product != null) productList.add(product);
+            } while (resultSet.next());
+        }
+        return productList;
     }
 
     @Override

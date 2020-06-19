@@ -28,6 +28,11 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
+    public List<Category> getList(ResultSet resultSet) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Category> findAll() throws SQLException {
         List<Category> categoryList = new ArrayList<>();
         //select *(là lấy tất cả các trường) from category(là thực hiện với bảng nào) where deleted = false (chứa các điều kiện khi lấy)

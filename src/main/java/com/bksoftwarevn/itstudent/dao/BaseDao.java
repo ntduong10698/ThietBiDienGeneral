@@ -9,6 +9,8 @@ public interface BaseDao<T> {
 
     T getObject(ResultSet resultSet) throws SQLException;
 
+    List<T> getList(ResultSet resultSet) throws SQLException;
+
     // lấy tất cả các bán ghi trong datbase của bảng category
     List<T> findAll() throws SQLException;
 

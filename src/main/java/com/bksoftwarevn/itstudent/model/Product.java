@@ -28,7 +28,7 @@ public class Product {
 
     private int bouth; // số lượng sản phẩm đã bán được
 
-    private int promotiton; // phần trăm khuyến mãi của sản phẩm
+    private int promotion; // phần trăm khuyến mãi của sản phẩm
 
     @Override
     public String toString() {
@@ -45,8 +45,48 @@ public class Product {
                 ", guarantee=" + guarantee +
                 ", categoryId=" + categoryId +
                 ", bouth=" + bouth +
-                ", promotiton=" + promotiton +
+                ", promotion=" + promotion +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public String getImage() {
@@ -105,15 +145,18 @@ public class Product {
         this.bouth = bouth;
     }
 
-    public int getPromotiton() {
-        return promotiton;
+    public int getPromotion() {
+        return promotion;
     }
 
-    public void setPromotiton(int promotiton) {
-        this.promotiton = promotiton;
+    public void setPromotion(int promotion) {
+        this.promotion = promotion;
     }
 
-    public Product(int id, String name, double price, Date createDate, boolean deleted, String image, String introduction, String specification, boolean soldOut, int guarantee, int categoryId, int bouth, int promotiton) {
+    public Product() {
+    }
+
+    public Product(int id, String name, double price, Date createDate, boolean deleted, String image, String introduction, String specification, boolean soldOut, int guarantee, int categoryId, int bouth, int promotion) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -126,59 +169,6 @@ public class Product {
         this.guarantee = guarantee;
         this.categoryId = categoryId;
         this.bouth = bouth;
-        this.promotiton = promotiton;
+        this.promotion = promotion;
     }
-
-    public Product() {
-    }
-
-    public Product(int id, String name, double price, Date createDate, boolean deleted) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.createDate = createDate;
-        this.deleted = deleted;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
-
 }

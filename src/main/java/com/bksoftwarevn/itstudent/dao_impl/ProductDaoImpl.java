@@ -109,7 +109,7 @@ public class ProductDaoImpl implements ProductDao {
         resultSet.getDouble("price"), resultSet.getDate("create_date"),
         resultSet.getBoolean("deleted"), resultSet.getString("image"),
                 resultSet.getString("introduction"),
-                resultSet.getString("spectification"),
+                resultSet.getString("specification"),
         resultSet.getBoolean("sold_out"), resultSet.getInt("guarantee"),
         resultSet.getInt("category_id"), resultSet.getInt("bought"),
         resultSet.getInt("promotion"));
@@ -153,7 +153,7 @@ public class ProductDaoImpl implements ProductDao {
         preparedStatement.setInt(8, product.getGuarantee());
         preparedStatement.setInt(9, product.getCategoryId());
         preparedStatement.setInt(10, product.getBouth());
-        preparedStatement.setInt(11, product.getPromotiton());
+        preparedStatement.setInt(11, product.getPromotion());
         int rs = preparedStatement.executeUpdate();
         if(rs > 0 ) {
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
